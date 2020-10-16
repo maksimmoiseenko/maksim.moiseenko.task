@@ -1,0 +1,36 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input formControlName="search" placeholder="search...">
+  <button type="submit" [disabled]="!form.valid">Search</button>
+</form>
+
+<button (click)="logOut()">Log out</button>
+<div>
+  <table class="table">
+    <tr>
+      <td></td>
+      <td>Name</td>
+      <td>Model</td>
+      <td>Unit</td>
+      <td>Type</td>
+      <td>Range</td>
+      <td>Description</td>
+      <td>Location</td>
+      <td></td>
+    </tr>
+    <tr *ngFor="let item of pageOfItems">
+      <td><button *ngIf='isAdmin' (click)="onDelete(item.id)">delete</button></td>
+      <td>{{item.name}}</td>
+      <td>{{item.model}}</td>
+      <td>{{item.unit}}</td>
+      <td>{{item.type}}</td>
+      <td>{{item.rangeFrom}}-{{item.rangeTo}}</td>
+      <td>{{item.description}}</td>
+      <td>{{item.location}}</td>
+      <td><button *ngIf='isAdmin' (click)="onEdit(item.id)">edit</button></td>
+    </tr>
+  </table>
+  <div class="card-footer pb-0 pt-3">
+    <jw-pagination  [pageSize]="4" [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+  </div>
+</div>
+<button *ngIf='isAdmin' (click)="addSensor()">Add</button>

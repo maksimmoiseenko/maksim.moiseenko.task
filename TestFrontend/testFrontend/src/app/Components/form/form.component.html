@@ -1,0 +1,44 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>
+    Name:
+    <input formControlName="name">
+  </label><br/>
+  <label>
+    Model:
+    <input formControlName="model">
+  </label><br/>
+  <label>
+    Range from:
+    <input type="number" formControlName="rangeFrom">
+  </label>
+  <label>
+    Range to:
+    <input type="number" formControlName="rangeTo" (ngModelChange)="validate()">
+    <p class="alert alert-danger" *ngIf="!isValid && form.controls['rangeTo'].touched">To must be bigger then from</p>
+  </label><br/>
+  <label>
+    Type:
+    <mat-select formControlName="type">
+      <mat-option *ngFor="let Type of types" value="{{Type.type}}">{{Type.type}}</mat-option>
+    </mat-select>
+  </label>
+  <label>
+    Unit:
+    <mat-select formControlName="unit">
+      <mat-option *ngFor="let Unit of units" value="{{Unit.unit}}">{{Unit.unit}}</mat-option>
+    </mat-select>
+  </label>
+  <label>
+    Location:
+    <input formControlName="location">
+  </label><br/>
+  <label>
+    Description:
+    <input formControlName="description">
+  </label>
+  <div class="buttons">
+    <button type="submit" [disabled]="!form.valid">Save</button>
+    <button (click)="back()">Cancel</button>
+  </div>
+
+</form>
