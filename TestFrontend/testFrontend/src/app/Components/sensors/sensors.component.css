@@ -1,9 +1,47 @@
-table {
+#table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
   width: 100%;
-  border: 1px solid black;
 }
-td{
-  border: 1px solid black;
+
+#table td, #table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.flexbox{
+  margin: 20px;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+.flexbox button,input{
+  margin: 20px;
+}
+.margin{
+  margin: 10px ;
+}
+.center{
+  line-height: 200px;
+  height: 200px;
   text-align: center;
+  width: 100%;
+}
+.card-footer pb-0 pt-3{
+  vertical-align: middle;
+}
+#table tr:nth-child(even){background-color: #f2f2f2;}
+
+#table tr:hover {background-color: #ddd;}
+
+#table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+.addBtn{
+  display: flex;
+  justify-content: center;
 }
 

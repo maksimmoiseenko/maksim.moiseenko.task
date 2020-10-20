@@ -27,7 +27,7 @@ export class SensorsComponent implements OnInit {
       });
 
       this.form = new FormGroup({
-        search: new FormControl(null, [ Validators.required])
+        search: new FormControl()
       });
   }
   constructor(private sensorService: SensorService,
@@ -38,19 +38,26 @@ export class SensorsComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   onSubmit(){
-    this.sensorService.search(this.form.controls.search.value).subscribe((data) => {
-      this.items = data;
-    });
+    if (this.form.controls.search.value !== ''){
+      this.sensorService.search(this.form.controls.search.value).subscribe((data) => {
+        this.items = data;
+      });
+    }
+    else {
+      this.sensorService.getSensors().subscribe((data) => {
+        this.items = data;
+      });
+    }
   }
 
   onDelete(id: number) {
     this.sensorService.delete(id);
-    this.ngOnInit();
+    location.reload();
   }
   onEdit(sensorId: number) {
     localStorage.setItem('Id', sensorId.toString());
-
     this.router.navigate(['/form']);
+
   }
   onChangePage(pageOfItems: Array<any>) {
 

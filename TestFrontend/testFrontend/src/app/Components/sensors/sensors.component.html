@@ -1,21 +1,27 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <input formControlName="search" placeholder="search...">
-  <button type="submit" [disabled]="!form.valid">Search</button>
-</form>
+<div class="margin">
+  <div class="flexbox">
+    <div class="left">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <input formControlName="search" placeholder="search...">
+      <button type="submit" >Search</button>
+    </form></div>
+    <div class="right"><button (click)="logOut()">Log out</button></div>
+  </div>
 
-<button (click)="logOut()">Log out</button>
-<div>
-  <table class="table">
+
+
+
+  <table id="table">
     <tr>
-      <td></td>
-      <td>Name</td>
-      <td>Model</td>
-      <td>Unit</td>
-      <td>Type</td>
-      <td>Range</td>
-      <td>Description</td>
-      <td>Location</td>
-      <td></td>
+      <th></th>
+      <th>Name</th>
+      <th>Model</th>
+      <th>Unit</th>
+      <th>Type</th>
+      <th>Range</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th></th>
     </tr>
     <tr *ngFor="let item of pageOfItems">
       <td><button *ngIf='isAdmin' (click)="onDelete(item.id)">delete</button></td>
@@ -29,8 +35,12 @@
       <td><button *ngIf='isAdmin' (click)="onEdit(item.id)">edit</button></td>
     </tr>
   </table>
-  <div class="card-footer pb-0 pt-3">
-    <jw-pagination  [pageSize]="4" [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+  <div class="center">
+    <div class="card-footer pb-0 pt-3">
+      <jw-pagination  [pageSize]="4" [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+    </div>
   </div>
+
+
+<div class="addBtn"><button id="addBtn" *ngIf='isAdmin' (click)="addSensor()">Add</button></div>
 </div>
-<button *ngIf='isAdmin' (click)="addSensor()">Add</button>

@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
       console.log(this.n);
       this.sensorService.getById(this.n).subscribe((data) => {
         this.sensor1 = data;
-        this.initForm()
+        this.initForm();
           });
     }
   }
@@ -87,7 +87,7 @@ export class FormComponent implements OnInit {
       this.sensorService.save(this.sensor);
       console.log(this.id);
       console.log(this.form.value);
-      this.back();
+
     }
   }
 
