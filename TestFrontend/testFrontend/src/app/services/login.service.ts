@@ -13,7 +13,7 @@ export class LoginService {
   }
 
   public send(user): Observable<any>{
-    return this.http.post(this.url, user);
+    return this.http.post(this.url + 'login', user);
 
   }
 }
