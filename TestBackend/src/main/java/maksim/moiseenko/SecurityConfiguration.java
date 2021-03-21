@@ -1,6 +1,6 @@
 package maksim.moiseenko;
 
-import org.modelmapper.ModelMapper;
+
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import lombok.RequiredArgsConstructor;
@@ -55,10 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
-    @Bean
-    public ModelMapper modelMapper(){
-        return new ModelMapper();
-    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
