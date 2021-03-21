@@ -24,7 +24,7 @@ export class SensorService {
     return this.http.get(this.baseUrl + 'types');
   }
   public delete(id){
-    this.http.post(this.baseUrl + 'sensor/delete', id).subscribe();
+    this.http.delete(this.baseUrl + 'sensor/delete', id).subscribe();
   }
   public save(form){
     this.http.post(this.baseUrl + 'sensor/save', form).subscribe(() =>{
