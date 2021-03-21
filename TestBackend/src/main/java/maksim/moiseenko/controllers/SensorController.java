@@ -8,6 +8,8 @@ import maksim.moiseenko.repositories.SensorRepository;
 import maksim.moiseenko.repositories.TypeRepository;
 import maksim.moiseenko.repositories.UnitRepository;
 import maksim.moiseenko.services.SensorService;
+import maksim.moiseenko.services.TypeService;
+import maksim.moiseenko.services.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,21 +20,29 @@ import java.util.List;
 @CrossOrigin(origins ="http://localhost:4200")
 public class SensorController {
 
-    @Autowired
-    private TypeRepository typeRepository;
-    @Autowired
-    private UnitRepository unitRepository;
-    @Autowired
-    private SensorService sensorService;
 
+    private final TypeService typeService;
+
+    private final UnitService unitService;
+
+    private final SensorService sensorService;
+
+    @Autowired
+    public SensorController(TypeService typeService,
+                            UnitService unitService,
+                            SensorService sensorService){
+        this.typeService=typeService;
+        this.unitService=unitService;
+        this.sensorService=sensorService;
+    }
     @GetMapping("/types")
     public List<Type> getTypes(){
-        return typeRepository.findAll();
+        return typeService.getTypes();
     }
 
     @GetMapping("/units")
     public List<Unit> getUnits(){
-        return unitRepository.findAll();
+        return unitService.getUnits();
     }
 
     @GetMapping("/sensors")
@@ -50,7 +60,7 @@ public class SensorController {
         return sensorService.search(substring);
     }
 
-    @PostMapping("/sensor/delete")
+    @DeleteMapping("/sensor/delete")
     public void deleteSensor(@RequestBody int id){
         System.out.println("delete sensor with id: "+id);
         sensorService.deleteById(id);

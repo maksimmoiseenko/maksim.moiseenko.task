@@ -10,8 +10,13 @@ import java.util.List;
 
 @Service
 public class SensorService {
+
+    private final SensorRepository sensorRepository;
+
     @Autowired
-    private SensorRepository sensorRepository;
+    public SensorService(SensorRepository sensorRepository){
+        this.sensorRepository=sensorRepository;
+    }
 
     public List<Sensor> search(String substring){
         List<Sensor> result= new ArrayList<>();
