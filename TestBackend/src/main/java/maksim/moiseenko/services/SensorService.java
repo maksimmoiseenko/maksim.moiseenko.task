@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SensorService {
@@ -19,57 +20,15 @@ public class SensorService {
     }
 
     public List<Sensor> search(String substring){
-        List<Sensor> result= new ArrayList<>();
-        List<Sensor> list =sensorRepository.findAll();
-        boolean isAdded;
-        try{
-            for(Sensor sensor: list){
-                isAdded=false;
-                if(sensor.getModel()!=null){
-                    if(sensor.getModel().contains(substring)){
-                        result.add(sensor);
-                        isAdded=true;
-                    }
-                }
-                if(!isAdded && sensor.getName()!=null){
-                    if(sensor.getName().contains(substring)) {
-                        result.add(sensor);
-                        isAdded=true;
-                    }
-                }
-                if(!isAdded && sensor.getType()!=null){
-                    if(sensor.getType().contains(substring)) {
-                        result.add(sensor);
-                        isAdded=true;
-                    }
-                }
-                if(!isAdded && sensor.getUnit()!=null){
-                    if(sensor.getUnit().contains(substring)) {
-                        result.add(sensor);
-                        isAdded=true;
-                    }
-                }
-                if((sensor.getRangeFrom()+"").contains(substring)
-                        ||(sensor.getRangeTo()+"").contains(substring)){
-                    result.add(sensor);
-                    isAdded=true;
-                }
-                if(!isAdded && sensor.getDescription()!=null){
-                    if(sensor.getDescription().contains(substring)) {
-                        result.add(sensor);
-                        isAdded=true;
-                    }
-                }
-                if(!isAdded && sensor.getLocation()!=null){
-                    if(sensor.getLocation().contains(substring))
-                        result.add(sensor);
-                }
+        List<Sensor> result=new ArrayList<>();
+        result.addAll(sensorRepository.findByNameContaining(substring));
+        result.addAll(sensorRepository.findByModelContaining(substring));
+        result.addAll(sensorRepository.findByUnitContaining(substring));
+        result.addAll(sensorRepository.findByTypeContaining(substring));
+        result.addAll(sensorRepository.findByLocationContaining(substring));
+        result.addAll(sensorRepository.findByDescriptionContaining(substring));
+        return result.stream().distinct().collect(Collectors.toList());
 
-            }
-        }
-        finally {
-            return result;
-        }
     }
     public Sensor findOneById(int id){
         return sensorRepository.findOne(id);
