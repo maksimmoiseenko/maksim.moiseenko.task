@@ -23,8 +23,6 @@ public class UserController {
 
     private final JwtTokenGenerator jwtTokenGenerator;
 
-    private final UserRepository userService;
-
     private final UserDetailsServiceImpl userDetailsService;
 
     @PostMapping("/login")
