@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,11 @@ import {Observable} from 'rxjs';
 export class TokenInterceptor implements HttpInterceptor {
   constructor() {
   }
+  baseUrl = environment.apiUrl;
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (req.url.includes('http://localhost:8080')){
+    if (req.url.includes(this.baseUrl)){
       const token = localStorage.getItem('token');
       console.log(token);
       if (token) {
