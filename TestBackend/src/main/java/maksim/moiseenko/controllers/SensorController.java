@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins ="http://localhost:4200")
+@CrossOrigin
 public class SensorController {
 
     final private TypeService typeService;
@@ -54,7 +54,6 @@ public class SensorController {
 
     @DeleteMapping("/sensor/delete")
     public void deleteSensor(@RequestBody int id){
-        System.out.println("delete sensor with id: "+id);
         sensorService.deleteById(id);
     }
 

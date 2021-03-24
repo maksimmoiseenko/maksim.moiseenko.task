@@ -74,6 +74,7 @@ public class SensorService {
         return sensorRepository.findOne(id);
     }
     public void deleteById(int id){
+        System.out.println("delete sensor with id: "+id);
         sensorRepository.delete(id);
     }
     public void save(Sensor sensor){
