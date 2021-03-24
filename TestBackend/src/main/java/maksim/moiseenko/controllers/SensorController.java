@@ -1,31 +1,23 @@
 package maksim.moiseenko.controllers;
 
-import maksim.moiseenko.dto.SensorDto;
 import maksim.moiseenko.models.Sensor;
 import maksim.moiseenko.models.Type;
 import maksim.moiseenko.models.Unit;
-import maksim.moiseenko.repositories.SensorRepository;
-import maksim.moiseenko.repositories.TypeRepository;
-import maksim.moiseenko.repositories.UnitRepository;
 import maksim.moiseenko.services.SensorService;
 import maksim.moiseenko.services.TypeService;
 import maksim.moiseenko.services.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins ="http://localhost:4200")
+@CrossOrigin
 public class SensorController {
 
-
-    private final TypeService typeService;
-
-    private final UnitService unitService;
-
-    private final SensorService sensorService;
+    final private TypeService typeService;
+    final private UnitService unitService;
+    final private SensorService sensorService;
 
     @Autowired
     public SensorController(TypeService typeService,

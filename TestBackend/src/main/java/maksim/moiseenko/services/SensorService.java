@@ -11,13 +11,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class SensorService {
-
-    private final SensorRepository sensorRepository;
-
+    final private SensorRepository sensorRepository;
     @Autowired
     public SensorService(SensorRepository sensorRepository){
         this.sensorRepository=sensorRepository;
     }
+
 
     public List<Sensor> search(String substring){
         List<Sensor> result=new ArrayList<>(sensorRepository.findByNameContainingOrTypeContainingOrUnitContainingOrLocationContainingOrDescriptionContainingOrModelContaining(substring,
@@ -30,6 +29,7 @@ public class SensorService {
         return sensorRepository.findOne(id);
     }
     public void deleteById(int id){
+        System.out.println("delete sensor with id: "+id);
         sensorRepository.delete(id);
     }
     public void save(Sensor sensor){
