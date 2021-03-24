@@ -20,13 +20,9 @@ public class SensorService {
     }
 
     public List<Sensor> search(String substring){
-        List<Sensor> result=new ArrayList<>();
-        result.addAll(sensorRepository.findByNameContaining(substring));
-        result.addAll(sensorRepository.findByModelContaining(substring));
-        result.addAll(sensorRepository.findByUnitContaining(substring));
-        result.addAll(sensorRepository.findByTypeContaining(substring));
-        result.addAll(sensorRepository.findByLocationContaining(substring));
-        result.addAll(sensorRepository.findByDescriptionContaining(substring));
+        List<Sensor> result=new ArrayList<>(sensorRepository.findByNameContainingOrTypeContainingOrUnitContainingOrLocationContainingOrDescriptionContainingOrModelContaining(substring,
+                substring,substring,substring,substring,substring));
+
         return result.stream().distinct().collect(Collectors.toList());
 
     }

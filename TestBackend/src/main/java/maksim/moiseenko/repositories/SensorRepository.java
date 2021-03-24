@@ -6,6 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface SensorRepository extends JpaRepository<Sensor,Integer> {
+    List<Sensor> findByNameContainingOrTypeContainingOrUnitContainingOrLocationContainingOrDescriptionContainingOrModelContaining(String name,
+                                                                                                                                  String Type,
+                                                                                                                                  String Unit,
+                                                                                                                                  String Location,
+                                                                                                                                  String Description,
+                                                                                                                                  String Model);
         List<Sensor> findByNameContaining(String s);
         List<Sensor> findByTypeContaining(String s);
         List<Sensor> findByUnitContaining(String s);
